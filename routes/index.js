@@ -1,10 +1,15 @@
-var express = require('express');
-var router = express.Router();
-var request = require('request');
+const express = require('express');
+const router = express.Router();
+const request = require('request');
 
-var PAT = process.argv[2];
-var target = process.argv[3];
-var resource = process.argv[4];
+const PAT = process.argv[2];
+const target = process.argv[3];
+const resource = process.argv[4];
+
+router.get('/', function(req, res, next) {
+  res.status(200);
+  res.send("Send a GET request to /create-webhook to create a webhook.");
+});
 
 router.get('/create-webhook', function(req, res, next) {
   console.log(":: Create Webhook - Sending POST ::");
@@ -40,7 +45,7 @@ router.post('/', function(req, res, body) {
   console.log(":: Received Handshake - Handling POST ::");
   console.log(req.headers);
   console.log(body);
-  var secret = req.header('X-Hook-Secret');
+  const secret = req.header('X-Hook-Secret');
   if (secret) {
     res.set('X-Hook-Secret', secret);
   }
