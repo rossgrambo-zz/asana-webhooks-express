@@ -8,6 +8,8 @@ const resource = process.argv[4];
 
 let savedSecret = null;
 
+request.debug = true;
+
 router.get('/', function(req, res, next) {
   res.status(200);
   let url = req.protocol + '://' + req.get('host') + "/create-webhook";
@@ -87,18 +89,28 @@ router.get('/delete-webhook', function(req, res, next) {
   });
 });
 
+// This function is only for debugging, never use this in an actual application.
+function sleepFor( sleepDuration ){
+  var now = new Date().getTime();
+  while(new Date().getTime() < now + sleepDuration){ /* do nothing */ }
+}
+
 /* HANDSHAKE */
 router.post('/', function(req, res, body) {
   console.log(":: Received Handshake - Handling POST ::");
 
+  // For Debugging, uncomment any lines below.
+  //sleepFor(15000);
   //console.log(req.headers);
   //console.log(body);
 
   const secret = req.header('X-Hook-Secret');
   if (secret) {
     res.set('X-Hook-Secret', secret);
+    res.set('SomeHeader', "cat=meow");
     savedSecret = secret;
   }
+
   res.status(200);
   res.send();
   console.log(":: Received Handshake - Sent Response ::");
