@@ -3,7 +3,7 @@
 This is an express app that will test your process for Asana Webhooks.
 
 Install Steps:
-* Clone the project `git clone git@github.com:rossgrambo/asana-webhooks-express.git`
+* Clone the project `git clone https://github.com/rossgrambo/asana-webhooks-express.git`
 * run `npm install` ( If you need to install node >>> mac: run `brew install node`, windows: https://nodejs.org/en/download/ )
 * run `npm install ngrok -g` (This installs it globally, you can install locally by removing the `-g`).
 
